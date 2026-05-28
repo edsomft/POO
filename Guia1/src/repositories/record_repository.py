@@ -26,3 +26,10 @@ class RecordRepository(AbstractRepository):
     def search(self, term: str):
         terms = unidecode(term).lower().split()
         results = []
+
+        for r in self._records:
+            nome = unidecode(r.name).lower()
+            add = unidecode(r.address).lower()
+            if all(palavra in nome or palavra in add for palavra in terms):
+                results.append(r)
+        return results

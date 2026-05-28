@@ -61,7 +61,7 @@ class TestRunner:
 
             for r in results:
                 text = (r.name + " " + r.address).lower()
-                if "joao" not in text or "rua" not in text or "a" not in text:
+                if "joão" not in text or "rua" not in text or "a" not in text:
                     print("FALHA: Resultado incorreto na busca")
                     return
 

@@ -1,5 +1,5 @@
 ﻿from typing import List, Tuple, Dict
-from tentativaquestionario import TentativaQuestionario
+from src.tentativaquestionario import TentativaQuestionario
 
 class Questionario:
     def __init__(self, titulo):
@@ -8,10 +8,6 @@ class Questionario:
     
     def adicionar_pergunta(self, pergunta):
         self.perguntas.append(pergunta)
-    
-    @property
-    def usuario(self):
-        return self.usuario
     
     def criar_attempt(self, usuario):
         return TentativaQuestionario(self, usuario)

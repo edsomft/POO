@@ -1,10 +1,10 @@
 from typing import List, Tuple, Dict
+from .pergunta import Pergunta
 
-class PerguntaMultiplaEscolha():
-    def __init__(self, texto, alternativas, explicacao_geral = None):
-        self.texto = texto
+class PerguntaMultiplaEscolha(Pergunta):
+    def __init__(self, texto, alternativas, explicacao_geral=None):
+        super().__init__(texto, explicacao_geral)
         self.alternativas = alternativas
-        self.explicacao_geral = explicacao_geral
 
     def validar_resposta(self, indice):
         resposta = self.alternativas[indice]

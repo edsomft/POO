@@ -1,31 +1,33 @@
-from typing import List, Tuple, Dict
+from datetime import datetime
+from .respostaobjetiva import RespostaObjetiva
+from .respostadiscursiva import RespostaDiscursiva
+from .perguntamultiplaescolha import PerguntaMultiplaEscolha
+from .perguntadiscursiva import PerguntaDiscursiva
 
 class TentativaQuestionario:
     def __init__(self, questionario, usuario):
         self.questionario = questionario
         self.usuario = usuario
+        self.data_inicio = datetime.now()
+        self.data_fim = None
         self.respostas = []
-    
-    def registrar_resposta(self, indice, resposta):
-        registro = [indice, resposta]
-        self.respostas.append(registro)
+
+    def registrar_resposta(self, indice_pergunta, valor):
+        pergunta = self.questionario.perguntas[indice_pergunta]
+        if isinstance(pergunta, PerguntaMultiplaEscolha):
+            resposta = RespostaObjetiva(pergunta, valor)
+        else:
+            resposta = RespostaDiscursiva(pergunta, valor)
+        self.respostas.append(resposta)
 
     def calcular_pontuacao(self):
-        pontuacao = 0
-        for res in self.respostas:
-            pergunta = self.questionario.perguntas[res[0]]
+        return sum(r.calcular_pontuacao() for r in self.respostas)
 
-            if pergunta.validar_resposta(res[1]) == True:
-                pontuacao = pontuacao +1
-        return pontuacao
-    
     def finalizar(self):
-        self._finalizado = True
+        self.data_fim = datetime.now()
         pontuacao = self.calcular_pontuacao()
-        total = len(self.questionario.perguntas)
-        feedback = f"Você acertou {pontuacao} de {total} questões."
+        feedback = f"Pontuação final: {pontuacao}"
         return pontuacao, feedback
 
     def is_finalizado(self):
-        return self._finalizado
-            
+        return self.data_fim is not None

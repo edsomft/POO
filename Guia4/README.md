@@ -93,11 +93,9 @@ classDiagram
         <<service>>
         -String api_key
         -String model
-        -String base_url
+        -Groq_obj groq
         +__init__(api_key: str, model: str = "llama3-70b-8192")
-        +corrigir_resposta(pergunta: PerguntaDiscursiva, resposta_aluno: str) -> Dict
         -_fazer_chamada_api(prompt: str) -> str
-        -_tratar_erro(e: Exception) -> None
     }
     
     class Correcao {

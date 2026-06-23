@@ -195,7 +195,7 @@ sistema-escola/
 
 ### 4.1 Criar o ambiente virtual
 
-Na pasta do projeto `...\sistema-escola>`, execute:
+Na pasta do projeto `...\Guia5>`, execute:
 
 ```bash
 python -m venv .venv
